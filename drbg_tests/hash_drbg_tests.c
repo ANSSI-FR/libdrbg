@@ -1,3 +1,13 @@
+/*
+ *  Copyright (C) 2022 - This file is part of libdrbg project
+ *
+ *  Author:       Ryad BENADJILA <ryad.benadjila@ssi.gouv.fr>
+ *  Contributor:  Arnaud EBALARD <arnaud.ebalard@ssi.gouv.fr>
+ *
+ *  This software is licensed under a dual BSD and GPL v2 license.
+ *  See LICENSE file at the root folder of the project.
+ */
+
 #ifdef WITH_HASH_DRBG
 
 #include "hash_drbg_tests.h"
