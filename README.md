@@ -44,7 +44,7 @@ by [practical collision attacks](https://shattered.io/).
 
 The implementation of CTR-DRBG strictly conforms to the standard as only AES and
 TDEA (TDES) are supported as possible block ciphers, although it would be possible
-to (easily) expand the library with other block ciphers. Please note tat TDEA is in
+to (easily) expand the library with other block ciphers. Please note that TDEA is in
 the process of [being fully deprecated](https://csrc.nist.gov/news/2017/update-to-current-use-and-deprecation-of-tdea),
 hence AES is the only choice in practice for production code.
 
