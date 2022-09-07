@@ -1,3 +1,5 @@
+[![compilation](https://github.com/ANSSI-FR/libdrbg/actions/workflows/libdrbg_compilation_tests.yml/badge.svg?branch=master)](https://github.com/ANSSI-FR/libdrbg/actions/workflows/libdrbg_compilation_tests.yml)
+
 # libdrbg project
 Copyright (C) 2022
 

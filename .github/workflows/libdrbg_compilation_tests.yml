@@ -1,0 +1,36 @@
+name: libdrbg
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  compilation_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      #max-parallel: 10
+      matrix:
+        cc: [gcc, clang, g++, clang++]
+        strict_nist: [0, 1]
+        optflags: ["-O3", "-O2", "-O1"]
+        remove_aes: [0, 1]
+        remove_tdea: [0, 1]
+    steps:
+      # Checkout repository
+      - name: checkout repository
+        uses: actions/checkout@v2
+      # Run actions
+      # libdrbg compilation tests
+      - name: librbg tests
+        env:
+          CC: ${{ matrix.cc }}
+          STRICT_NIST_SP800_90A: ${{ matrix.strict_nist }}
+          EXTRA_LIB_CFLAGS: ${{ matrix.optflags }}
+          NO_BC_AES: ${{ matrix.remove_aes }}
+          NO_BC_TDEA: ${{ matrix.remove_tdea }}
+        shell: bash
+        run: |
+          # Compilation tests of all cases
+          #
+          WITH_TEST_ENTROPY_SOURCE=1 USE_SANITIZERS=1 make
+          ./drbg
+        continue-on-error: false
