@@ -33,6 +33,6 @@ jobs:
         run: |
           # Compilation tests of all cases
           #
-          PEDANTIC=1 WITH_TEST_ENTROPY_SOURCE=1 USE_SANITIZERS=1 make
+          WITH_TEST_ENTROPY_SOURCE=1 USE_SANITIZERS=1 make
           ./drbg
         continue-on-error: false
