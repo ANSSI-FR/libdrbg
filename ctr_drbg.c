@@ -464,6 +464,9 @@ static drbg_error ctr_drbg_init(drbg_ctx *ctx,
 	/* Avoid unused variables */
 	(void)V;
 	(void)Key;
+	(void)key_len;
+	(void)seed_len;
+	(void)use_df;
 #endif
 
 	if(ctx == NULL){
@@ -556,6 +559,7 @@ static drbg_error ctr_drbg_init(drbg_ctx *ctx,
 		}
 	}
 
+#if defined(WITH_BC_AES) || defined(WITH_BC_TDEA)
 	/***********************************************/
 	/* Handle seed_len
 	 * seedlen = outlen + keylen
@@ -612,6 +616,7 @@ static drbg_error ctr_drbg_init(drbg_ctx *ctx,
 	ctx->engine_magic = CTR_DRBG_INIT_MAGIC;
 
 	ret = CTR_DRBG_OK;
+#endif
 err:
 	return ret;
 }
@@ -626,6 +631,7 @@ static drbg_error ctr_drbg_init_with_strength(drbg_ctx *ctx,
 	/* Avoid unused variables */
 	(void)ctx;
 	(void)drbg_strength;
+	(void)bc_type;
 #endif
 
 #ifdef WITH_BC_TDEA
@@ -651,7 +657,9 @@ static drbg_error ctr_drbg_init_with_strength(drbg_ctx *ctx,
 		goto err;
 	}
 
+#if defined(WITH_BC_AES) || defined(WITH_BC_TDEA)
 	ret = ctr_drbg_init(ctx, bc_type, false, 0);
+#endif
 err:
 	return ret;
 }
