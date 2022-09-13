@@ -159,10 +159,10 @@ int aes_mode(aes_context * aes_ctx, const unsigned char *data_in,
 	case CTR:{
 			unsigned int i;
 			unsigned int offset;
-		/* Sanity check on the offset */
-		if(aes_ctx->last_off > AES_BLOCK_SIZE){
-		goto err;
-		}
+			/* Sanity check on the offset */
+			if(aes_ctx->last_off > AES_BLOCK_SIZE){
+				goto err;
+			}
 			offset = aes_ctx->last_off;
 			for (i = 0; i < data_len; i++) {
 				if (offset == 0) {

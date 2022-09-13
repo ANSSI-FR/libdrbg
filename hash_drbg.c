@@ -854,7 +854,7 @@ drbg_error hash_drbg_generate(drbg_ctx *ctx,
 		}
 		/* Truncate w if necessary */
 		if(digest_size > seed_len){
-			memcpy(w, &w[offset], seed_len);
+			memmove(w, &w[digest_size - seed_len], seed_len);
 		}
 		/* V = (V + w) mod 2 seedlen */
 		hash_drbg_integer_sum(V, w, V, seed_len);
@@ -883,7 +883,7 @@ drbg_error hash_drbg_generate(drbg_ctx *ctx,
 	}
 	/* Truncate H if necessary */
 	if(digest_size > seed_len){
-		memcpy(H, &H[offset], seed_len);
+		memmove(H, &H[digest_size - seed_len], seed_len);
 	}
 	/* V = (V + H + C + reseed_counter) mod 2 seedlen.
 	 * We do that in 3 consecutive steps.
