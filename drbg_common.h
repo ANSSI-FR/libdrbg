@@ -11,6 +11,7 @@
 #ifndef __DRBG_COMMON_H__
 #define __DRBG_COMMON_H__
 
+#include "utils.h"
 #include "helpers.h"
 
 /*** Sanity check ***/
