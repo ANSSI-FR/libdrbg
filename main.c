@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 		/* Test the CTR DRBG abstraction */
 		DRBG_CTR_OPTIONS_INIT(opt, CTR_DRBG_BC_TDEA, true, 5);
 		security_strength = 100;
-		ret = drbg_instantiate_user_entropy(&drbg, pers_string, sizeof(pers_string) - 1, entropy, sizeof(entropy), nonce, sizeof(nonce), &security_strength, true, DRBG_CTR, &opt);
+		ret = drbg_instantiate_with_user_entropy(&drbg, pers_string, sizeof(pers_string) - 1, entropy, sizeof(entropy), nonce, sizeof(nonce), &security_strength, true, DRBG_CTR, &opt);
 		if(ret != DRBG_OK){
 			goto err;
 		}
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 #ifdef WITH_BC_AES
 		/**/
 		DRBG_CTR_OPTIONS_INIT(opt, CTR_DRBG_BC_AES256, true, 0);
-		ret = drbg_instantiate_user_entropy(&drbg, pers_string, sizeof(pers_string) - 1, entropy, sizeof(entropy), nonce, sizeof(nonce), NULL, true, DRBG_CTR, &opt);
+		ret = drbg_instantiate_with_user_entropy(&drbg, pers_string, sizeof(pers_string) - 1, entropy, sizeof(entropy), nonce, sizeof(nonce), NULL, true, DRBG_CTR, &opt);
 		if(ret != DRBG_OK){
 			goto err;
 		}
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 		/* Test the HMAC DRBG abstraction */
 		DRBG_HMAC_OPTIONS_INIT(opt, HASH_SHA1);
 		security_strength = 128;
-		ret = drbg_instantiate_user_entropy(&drbg, pers_string, sizeof(pers_string) - 1, entropy, sizeof(entropy), nonce, sizeof(nonce), &security_strength, false, DRBG_HMAC, &opt);
+		ret = drbg_instantiate_with_user_entropy(&drbg, pers_string, sizeof(pers_string) - 1, entropy, sizeof(entropy), nonce, sizeof(nonce), &security_strength, false, DRBG_HMAC, &opt);
 		if(ret != DRBG_OK){
 			goto err;
 		}

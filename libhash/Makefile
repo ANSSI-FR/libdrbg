@@ -1,7 +1,7 @@
 LIB_CFLAGS ?= -fPIC -O3 -std=c99 -Wall -Wextra -Werror
 AR_FLAGS ?= rcs
 
-RANLIB = ranlib
+RANLIB ?= ranlib
 
 LIB_CFLAGS += $(EXTRA_CFLAGS)
 
