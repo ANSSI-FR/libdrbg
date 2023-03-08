@@ -10,6 +10,8 @@
 
 #include "libhash_config.h"
 
+#ifdef WITH_HASH_SHA3_512
+
 #include "sha3-512.h"
 
 /* Init hash function. Returns 0 on success, -1 on error. */
@@ -99,3 +101,10 @@ int sha3_512(const uint8_t *input, uint32_t ilen, uint8_t output[SHA3_512_DIGEST
 err:
 	return ret;
 }
+
+#else
+/*
+ * Dummy definition to avoid the empty translation unit ISO C warning
+ */
+typedef int dummy;
+#endif

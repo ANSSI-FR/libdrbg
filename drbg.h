@@ -45,7 +45,7 @@ drbg_error drbg_generate(drbg_ctx *ctx,
 			 bool prediction_resistance_req);
 
 /*** Advanced APIs with external entropy provided by the user ***/
-drbg_error drbg_instantiate_user_entropy(drbg_ctx *ctx,
+drbg_error drbg_instantiate_with_user_entropy(drbg_ctx *ctx,
 					 const uint8_t *pers_string, uint32_t pers_string_len,
 					 const uint8_t *entropy_input, uint32_t entropy_input_len,
 					 const uint8_t *nonce, uint32_t nonce_len,
@@ -54,7 +54,7 @@ drbg_error drbg_instantiate_user_entropy(drbg_ctx *ctx,
 					 drbg_type type,
 					 drbg_options *opt);
 
-drbg_error drbg_reseed_user_entropy(drbg_ctx *ctx,
+drbg_error drbg_reseed_with_user_entropy(drbg_ctx *ctx,
 				    const uint8_t *entropy_input, uint32_t entropy_input_len,
 				    const uint8_t *addin, uint32_t addin_len,
 				    bool prediction_resistance_req);

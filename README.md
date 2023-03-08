@@ -492,7 +492,7 @@ his implementation of `get_entropy_input` in [entropy.c](entropy.c):
 Error: please provide your implementation of entropy gathering in the file 'entropy.c'!
 </pre>
 
-**NOTE**: this claim is however not entirely true when using the advanced API with `_user_entropy`
+**NOTE**: this claim is however not entirely true when using the advanced API with `with_user_entropy`
 suffix as all the entropy is provided by the user as parameters to the functions, hence no call to
 `get_entropy_input` should occur in such cases!
 
