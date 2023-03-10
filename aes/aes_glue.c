@@ -134,6 +134,7 @@ int aes_mode(aes_context * aes_ctx, const unsigned char *data_in,
 					memcpy(iv_tmp, data_out + (AES_BLOCK_SIZE * i),
 						   sizeof(iv_tmp));
 				}
+				memcpy(aes_ctx->iv, iv_tmp, sizeof(iv_tmp));
 			} else if (aes_ctx->dir == AES_DECRYPT) {
 				unsigned int i, j;
 				uint8_t iv_tmp[AES_BLOCK_SIZE];
@@ -151,6 +152,7 @@ int aes_mode(aes_context * aes_ctx, const unsigned char *data_in,
 					}
 					memcpy(iv_tmp, tmp, sizeof(iv_tmp));
 				}
+				memcpy(aes_ctx->iv, iv_tmp, sizeof(iv_tmp));
 			} else {
 				goto err;
 			}
