@@ -8,7 +8,7 @@ See [LICENSE](LICENSE) file at the root folder of the project.
 
 ## Authors
 
-  * Ryad BENADJILA (<mailto:ryad.benadjila@ssi.gouv.fr>)
+  * Ryad BENADJILA (<mailto:ryadbenadjila@gmail.com>)
   * Arnaud EBALARD (<mailto:arnaud.ebalard@ssi.gouv.fr>)
 
 ## Description
