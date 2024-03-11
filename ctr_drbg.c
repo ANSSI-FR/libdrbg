@@ -1105,6 +1105,9 @@ drbg_error ctr_drbg_generate(drbg_ctx *ctx,
 		goto err;
 	}
 
+        /* Update the reseed counter */
+        ctx->reseed_counter++;
+
 	ret = CTR_DRBG_OK;
 err:
 	return ret;
