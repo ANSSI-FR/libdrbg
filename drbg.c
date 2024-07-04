@@ -332,13 +332,11 @@ err:
 	if(entropy_pool1 != NULL){
 		if(clear_entropy_input(entropy_pool1)){
 			ret = DRBG_ENTROPY_ERROR;
-			goto err;
 		}
 	}
 	if(entropy_pool2 != NULL){
 		if(clear_entropy_input(entropy_pool2)){
 			ret = DRBG_ENTROPY_ERROR;
-			goto err;
 		}
 	}
 
