@@ -400,7 +400,6 @@ err:
 	if(entropy_pool != NULL){
 		if(clear_entropy_input(entropy_pool)){
 			ret = DRBG_ENTROPY_ERROR;
-			goto err;
 		}
 	}
 
