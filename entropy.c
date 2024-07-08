@@ -196,6 +196,11 @@ int clear_entropy_input(uint8_t *buf)
 	/* Clean the buffer until pos */
 	memset(curr_entropy_pool.entropy_buff, 0, curr_entropy_pool.entropy_buff_pos);
 
+	/* Ensure the pool is in an uninit state,
+	 * so it is fully reset by the next get_entropy_input call
+	 */
+	curr_entropy_pool_init = false;
+
 	ret = 0;
 err:
 	return ret;

@@ -332,13 +332,11 @@ err:
 	if(entropy_pool1 != NULL){
 		if(clear_entropy_input(entropy_pool1)){
 			ret = DRBG_ENTROPY_ERROR;
-			goto err;
 		}
 	}
 	if(entropy_pool2 != NULL){
 		if(clear_entropy_input(entropy_pool2)){
 			ret = DRBG_ENTROPY_ERROR;
-			goto err;
 		}
 	}
 
@@ -402,7 +400,6 @@ err:
 	if(entropy_pool != NULL){
 		if(clear_entropy_input(entropy_pool)){
 			ret = DRBG_ENTROPY_ERROR;
-			goto err;
 		}
 	}
 
@@ -645,11 +642,14 @@ drbg_error drbg_generate_with_user_entropy(drbg_ctx *ctx,
 /* DRBG uninstantiate */
 drbg_error drbg_uninstantiate(drbg_ctx *ctx)
 {
+
+    drbg_error ret = DRBG_OK;
+
 	if(drbg_check_instantiated(ctx)){
-		/* NOTE: we ignore the return value on purpose to clean up
-		 * the other fields in any case
+		/* NOTE: do not return immediately if an error happened,
+		 * empty the other fields first.
 		 */
-		ctx->methods->uninstantiate(ctx);
+		ret = ctx->methods->uninstantiate(ctx);
 	}
 
 	ctx->prediction_resistance = false;
@@ -659,5 +659,5 @@ drbg_error drbg_uninstantiate(drbg_ctx *ctx)
 
 	ctx->magic = 0;
 
-	return DRBG_OK;
+	return ret;
 }
