@@ -507,13 +507,11 @@ When using the advanced DRBG APIs where buffers are provided as inputs to the fu
 the `get_entropy_input` usage, the same recommendations obviously apply for the quality of the entropy in
 the provided buffers.
 
-### The `get_entropy_input` API
+### The `get_entropy_input` and `clear_entropy_input` API
 
 The rationale behind `get_entropy_input` is to be called with a pointer to a buffer pointer (`uint8_t **buf`)
-and a length, and return an "allocated" buffer with fresh entropy of the asked length. In the example implementation
-of [entropy.c](entropy.c), there is no dynamic allocation per se: we use a static circular buffer to
-provide this feature (this is mainly to avoid `malloc` and keep things simple).
-
+and a length, and return an "allocated" buffer with fresh entropy of the asked length.
+ 
 After calling `get_entropy_input` and getting a fresh entropy buffer back, it is the responsibility of the
 calling application to explicitly execute `clear_entropy_input` with the buffer pointer for garbage collection
 and memory maintenance (this would be the place for a `free` and a zeroization for instance). Calling
@@ -521,6 +519,15 @@ and memory maintenance (this would be the place for a `free` and a zeroization f
 
 The user is invited and encouraged to adapt/modify these specific implementations of `get_entropy_input` and
 `clear_entropy_input`.
+
+In [entropy.c](entropy.c) when `WITH_TEST_ENTROPY_SOURCE=1` is active, basic implementations of
+`get_entropy_input` and `clear_entropy_input` are provided. There is no dynamic allocation per se: we use a
+static circular buffer to provide this feature (this is mainly to avoid `malloc` and keep things simple).
+Please note that these implementations are **very naive** and suboptimal as some fresh entropy is thrown away
+in some cases (for the sake of simplicity). This will have consequences on entropy gathering with possible starvation
+when slow TRNG providers are used, or when many parallel DRBG instances run concurrently.
+Hence, it is strongly advised to provide your own implementation of `get_entropy_input` and `clear_entropy_input`
+
 
 ## Comparative performance and security of DRBG instances
 
