@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
                 (void)max_len;
                 (void)opt;
 		(void)security_strength;
+		(void)ret;
+		(void)drbg;
 
 #ifdef WITH_CTR_DRBG
 #ifdef WITH_BC_TDEA
