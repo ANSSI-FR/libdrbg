@@ -3,8 +3,8 @@
 # libdrbg project
 Copyright (C) 2022
 
-This software is licensed under a dual BSD and GPL v2 license.
-See [LICENSE](LICENSE) file at the root folder of the project.
+This software is licensed under dual [BSD](LICENSE-BSD-2) and [GPL
+v2](LICENSE-GPL-2) licenses.
 
 ## Authors
 
