@@ -164,6 +164,9 @@ int get_entropy_input(uint8_t **buf, uint32_t len, bool prediction_resistance)
 		curr_entropy_pool.entropy_buff_pos = 0;
 		curr_entropy_pool.entropy_buff_len = sizeof(curr_entropy_pool.entropy_buff);
 		(*buf) = curr_entropy_pool.entropy_buff;
+		/* Remove the consumed data */
+		curr_entropy_pool.entropy_buff_pos += len;
+		curr_entropy_pool.entropy_buff_len -= len;
 	}
 
 	/* Sanity checks */
@@ -188,6 +191,12 @@ int clear_entropy_input(uint8_t *buf)
 	int ret = -1;
 	uint8_t *buf_max = (curr_entropy_pool.entropy_buff + curr_entropy_pool.entropy_buff_pos);
 
+	/* Sanity check that we are indeed initialized:
+	 * clear_entropy_input MUST always take place after at least one get_entropy_input
+	 */
+	if(!curr_entropy_pool_init){
+		goto err;
+	}
 	/* Sanity check */
 	if((buf < curr_entropy_pool.entropy_buff) || (buf > buf_max)){
 		goto err;
@@ -195,11 +204,6 @@ int clear_entropy_input(uint8_t *buf)
 
 	/* Clean the buffer until pos */
 	memset(curr_entropy_pool.entropy_buff, 0, curr_entropy_pool.entropy_buff_pos);
-
-	/* Ensure the pool is in an uninit state,
-	 * so it is fully reset by the next get_entropy_input call
-	 */
-	curr_entropy_pool_init = false;
 
 	ret = 0;
 err:

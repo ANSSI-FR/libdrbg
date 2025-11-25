@@ -274,7 +274,7 @@ int hash_hfunc_scattered(const uint8_t **input, const uint32_t *ilen, uint8_t *d
 #endif
 #ifdef WITH_HASH_SHA512
 		case HASH_SHA512:{
-			ret = sha384_scattered(input, ilen, digest); EG(ret, err);
+			ret = sha512_scattered(input, ilen, digest); EG(ret, err);
 			break;
 		}
 #endif

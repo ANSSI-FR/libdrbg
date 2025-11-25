@@ -108,6 +108,20 @@ CLANG_VERSION_GTE_13 := $(shell echo `$(CROSS_COMPILE)$(CC) -dumpversion | cut -
   # We have to do this because the '_' prefix seems now reserved to builtins
   CFLAGS += -Wno-reserved-identifier
   endif
+# Clang version >= 16? Adapt
+CLANG_VERSION_GTE_16 := $(shell echo `$(CROSS_COMPILE)$(CC) -dumpversion | cut -f1-2 -d.` \>= 16.0 | sed -e 's/\./*100+/g' | bc)
+  ifeq ($(CLANG_VERSION_GTE_16), 1)
+  # NOTE: XXX: this is really a shame to remove this, but
+  # we have to wait until this is less sensitive and false positive
+  # prone to use it!
+  CFLAGS += -Wno-unsafe-buffer-usage
+  endif
+# Clang version >= 19? Adapt
+CLANG_VERSION_GTE_19 := $(shell echo `$(CROSS_COMPILE)$(CC) -dumpversion | cut -f1-2 -d.` \>= 19.0 | sed -e 's/\./*100+/g' | bc)
+  ifeq ($(CLANG_VERSION_GTE_19), 1)
+  # Missing include directoies become an issue in clang >= 19
+  CFLAGS += -Wno-missing-include-dirs
+  endif
 else
 CFLAGS += -W -Werror -Wextra -Wall -Wunreachable-code
 # Add warnings if we are in pedantic mode
