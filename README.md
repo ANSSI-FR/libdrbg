@@ -6,6 +6,8 @@ Copyright (C) 2022
 This software is licensed under dual [BSD](LICENSE-BSD-2) and [GPL
 v2](LICENSE-GPL-2) licenses.
 
+**2025-11-25:** ANSSI has stopped working on the project. Interested people can use the maintained fork at [https://github.com/libecc/libdrbg](libecc/libdrb).
+
 ## Authors
 
   * Ryad BENADJILA (<mailto:ryadbenadjila@gmail.com>)
